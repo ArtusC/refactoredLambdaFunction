@@ -14,7 +14,6 @@ import headers_and_params as hp
 
 
 # gets lbct vessel data as a pandas dataframe
-# ja foi
 def get_lbct_vessel():
     try:
         response = requests.get(static.LBCT_URL, verify=False)
@@ -39,7 +38,6 @@ def get_lbct_vessel():
 
 
 # gets piera vessel data as a pandas dataframe
-# ja foi
 def get_piera_vessel():
     try:
         cookies = login_piera()
@@ -66,7 +64,6 @@ def get_piera_vessel():
 
 
 # gets Fenix Marine vessel data as a pandas dataframe
-# ja foi
 def get_fenix_vessel():
     cookies = hp.FENIX_COOKIES
     headers = hp.FENIX_HEADERS
@@ -95,7 +92,6 @@ def get_fenix_vessel():
 
 
 # gets pct vessel data as a pandas dataframe
-# ja foi
 def get_pct_vessel():
     try: 
         cookies = login_pct()
@@ -121,7 +117,6 @@ def get_pct_vessel():
 
 
 # gets its vessel data as a pandas dataframe
-# ja foi
 def get_its_vessel():
     try:
         cookies_from_db = get_cookie("ITS")
@@ -149,7 +144,6 @@ def get_its_vessel():
 
 
 # gets ets vessel data as a pandas dataframe
-# ja foi
 def get_ets_vessel():
     cookies = hp.ETS_COOKIES
     headers = hp.ETS_HEADERS
@@ -175,7 +169,6 @@ def get_ets_vessel():
 
 
 # gets apm vessel data as a pandas dataframe
-# ja foi
 def get_apm_vessel():
     try:
         s = requests.Session()
@@ -210,7 +203,6 @@ def get_apm_vessel():
 
 
 # gets yti vessel data as a pandas dataframe
-# ja foi
 def get_yti_vessel():
     
     headers = hp.YTI_HEADERS
@@ -241,7 +233,6 @@ def get_yti_vessel():
 
 
 # gets wbct vessel data as a pandas dataframe
-# ja foi
 def get_wbct_vessel():
     headers = hp.WBCT_HEADERS
     params = hp.WBCT_PARAMS
@@ -263,7 +254,6 @@ def get_wbct_vessel():
 
 
 # gets trapac vessel data as a pandas dataframe
-# ja foi
 def get_trapac_vessel():
     myhtml = ""
 
@@ -335,7 +325,6 @@ def get_trapac_vessel():
         return None
 
 # gets tti vessel data as a pandas dataframe
-# ja foi
 def get_tti_vessel():
     try:
         headers = hp.TTI_HEADERS
@@ -369,7 +358,6 @@ def update_cookie(cookie, terminal):
     sql = "UPDATE Cookies SET Cookie=%s WHERE Terminal=%s"
     val = (cookie, terminal)
     result = mycursor.execute(sql, val)
-    print(result)
     db.commit()
     db.close()
 
@@ -407,9 +395,7 @@ def connect_to_database():
     )
 
 # automatically logs into piera
-# ja foi
 def login_piera():
-    # ja foi
     s = requests.Session()
     headers = hp.PIERA_LOGIN_FIRST_REQUEST_HEADERS
     response = s.get(static.PIERA_LOGIN_FIRST_URL,
@@ -446,7 +432,6 @@ def login_piera():
 
 
 # automatically logs into Pct
-# ja foi
 def login_pct():
     s = requests.Session()
     headers = hp.PCT_LOGIN_FIRST_REQUEST_HEADERS
@@ -490,7 +475,6 @@ def get_vessel_master():
     vessel_master = pd.concat([get_apm_vessel(), get_ets_vessel(), get_fenix_vessel(), get_its_vessel(),
                                get_lbct_vessel(), get_pct_vessel(), get_piera_vessel(), get_trapac_vessel(),
                                get_tti_vessel(), get_wbct_vessel(), get_yti_vessel()])
-    print(vessel_master)
     return vessel_master
 
 
